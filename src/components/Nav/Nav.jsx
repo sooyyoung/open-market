@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../assets/logo.png";
 import searchIcon from "../../assets/search.svg";
@@ -22,10 +23,12 @@ export default function Nav() {
           <img src={shoppingCartIcon} alt="장바구니" />
           <span>장바구니</span>
         </NavBtn>
-        <NavBtn className="userBtn">
-          <img src={userIcon} alt="마이페이지" />
-          <span>마이페이지</span>
-        </NavBtn>
+        <Link to="/login">
+          <NavBtn className="userBtn">
+            <img src={userIcon} alt="마이페이지" />
+            <span>로그인</span>
+          </NavBtn>
+        </Link>
       </Inner>
     </Header>
   );
@@ -80,7 +83,7 @@ const NavBtn = styled.button`
     margin-left: auto;
   }
   &.userBtn {
-    margin: 0 0 auto 20px;
+    margin: 0 0 auto 15px;
   }
   span {
     margin-top: 1px;
