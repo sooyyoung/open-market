@@ -5,7 +5,7 @@ import FormHeader from "./FormHeader";
 export default function LoginForm() {
   return (
     <LoginContainer>
-      <FormHeader />
+      <FormHeader buyer="구매회원 로그인" seller="판매회원 로그인" />
       <form>
         <input type="text" placeholder="아이디" />
         <input type="password" placeholder="비밀번호" />

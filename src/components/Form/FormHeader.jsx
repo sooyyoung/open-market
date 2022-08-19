@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function FormHeader() {
+export default function FormHeader({ buyer, seller }) {
   const [tabBtn, setTabBtn] = useState(true);
 
   // 구매회원 or 판매회원 로그인 Tab
@@ -12,10 +12,10 @@ export default function FormHeader() {
   return (
     <TapBtn>
       <button onClick={handleClick} className={tabBtn ? "on" : "disabled"}>
-        구매회원 로그인
+        {buyer}
       </button>
       <button onClick={handleClick} className={tabBtn ? "disabled" : "on"}>
-        판매회원 로그인
+        {seller}
       </button>
     </TapBtn>
   );
