@@ -4,6 +4,7 @@ import GlobalStyle from "./styles/GlobalStyle";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Join from "./pages/Join";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<Join />} />
+            <Route path="/*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </>
