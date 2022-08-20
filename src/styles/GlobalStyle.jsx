@@ -22,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
     input, button {
         font-size: inherit;
         border: none;
-        background-color: white;
+        background-color: inherit;
     }
 
     button {
