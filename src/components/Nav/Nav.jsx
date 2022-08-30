@@ -11,7 +11,9 @@ export default function Nav() {
     <Header>
       <Inner>
         <H1>
-          <img src={logo} alt="Open Market" />
+          <Link to="/">
+            <img src={logo} alt="오픈마켓 로고" />
+          </Link>
         </H1>
         <Search>
           <input type="text" placeholder="상품을 검색해보세요!" />
