@@ -25,6 +25,7 @@ export default function JoinForm() {
   const [isId, setIsId] = useState(false);
   const [isPw, setIsPw] = useState(false);
   const [isPwCheck, setIsPwCheck] = useState(false);
+  const [acceptCheckBox, setAcceptCheckBox] = useState(false);
 
   // 아이디 중복확인
   const handleCheckId = async () => {
@@ -91,6 +92,11 @@ export default function JoinForm() {
         "휴대폰번호는 01*으로 시작해야 하는 10~11자리 숫자여야 합니다."
       );
     }
+  };
+
+  // 이용약관 체크 박스 확인
+  const handleClickAcceptCheck = () => {
+    setAcceptCheckBox((acceptCheckBox) => !acceptCheckBox);
   };
 
   return (
@@ -200,7 +206,12 @@ export default function JoinForm() {
         <input type="text" className="email" />
 
         <AcceptCheck>
-          <input type="checkbox" id="acceptCheck" className="acceptCheck" />
+          <input
+            type="checkbox"
+            id="acceptCheck"
+            className="acceptCheck"
+            onClick={handleClickAcceptCheck}
+          />
           <label htmlFor="acceptCheck">
             <strong>
               <u>이용약관</u>
@@ -213,7 +224,24 @@ export default function JoinForm() {
           </label>
         </AcceptCheck>
 
-        <JoinBtn type="submit">가입하기</JoinBtn>
+        <JoinBtn
+          type="submit"
+          className={
+            isId &&
+            isPw &&
+            isPwCheck &&
+            name !== "" &&
+            phone1 !== "" &&
+            phone2 !== "" &&
+            phone3 !== "" &&
+            phoneNumMessage === "" &&
+            acceptCheckBox
+              ? "active"
+              : "disabled"
+          }
+        >
+          가입하기
+        </JoinBtn>
       </form>
     </JoinContainer>
   );
@@ -291,9 +319,20 @@ const JoinBtn = styled.button`
   height: 60px;
   margin: 0 auto;
   display: block;
-  background-color: #c4c4c4;
+  /* background-color: #4169e1; */
   border-radius: 5px;
-  color: #fff;
+  /* color: #fff; */
+  &.disabled {
+    cursor: default;
+    pointer-events: none;
+    background: #c4c4c4;
+    color: #fff;
+  }
+
+  &.active {
+    background-color: #4169e1;
+    color: #fff;
+  }
 `;
 
 const Message = styled.span`
