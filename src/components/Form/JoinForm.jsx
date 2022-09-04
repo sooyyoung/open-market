@@ -319,9 +319,7 @@ const JoinBtn = styled.button`
   height: 60px;
   margin: 0 auto;
   display: block;
-  /* background-color: #4169e1; */
   border-radius: 5px;
-  /* color: #fff; */
   &.disabled {
     cursor: default;
     pointer-events: none;
