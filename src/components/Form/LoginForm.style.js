@@ -26,3 +26,10 @@ export const LoginContainer = styled.section`
     }
   }
 `;
+
+export const Message = styled.span`
+  display: block;
+  margin: 5px 0;
+  font-size: 16px;
+  color: #eb5757;
+`;
