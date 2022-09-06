@@ -42,7 +42,7 @@ const Header = styled.header`
 `;
 
 const Inner = styled.div`
-  width: 1280px;
+  max-width: 1280px;
   height: 90px;
   margin: 0 auto;
   padding: 22px 0;
@@ -52,7 +52,7 @@ const Inner = styled.div`
 const H1 = styled.h1`
   img {
     height: 50px;
-    margin-right: 25px;
+    margin: 0 22px;
   }
 `;
 
