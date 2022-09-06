@@ -32,6 +32,8 @@ const TapBtn = styled.div`
   button.on {
     background-color: #fff;
     border-bottom: none;
+    cursor: default;
+    pointer-events: none;
   }
   button.disabled {
     background-color: #f2f2f2;
