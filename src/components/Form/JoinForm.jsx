@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../../api/api";
 import styled from "styled-components";
 import FormHeader from "./FormHeader";
@@ -6,6 +7,7 @@ import checkOff from "../../assets/check-off.svg";
 import checkOn from "../../assets/check-on.svg";
 
 export default function JoinForm() {
+  const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const [pwCheck, setPwCheck] = useState("");
@@ -33,7 +35,7 @@ export default function JoinForm() {
     const resultId = regExp.test(id);
 
     try {
-      const res = await API.post("accounts/signup/valid/", { username: id });
+      const res = await API.post("/accounts/signup/valid/", { username: id });
       if (res.status === 202) {
         setIdMessage("멋진 아이디네요 :)");
         setIsId(true);
@@ -97,6 +99,33 @@ export default function JoinForm() {
   // 이용약관 체크 박스 확인
   const handleClickAcceptCheck = () => {
     setAcceptCheckBox((acceptCheckBox) => !acceptCheckBox);
+  };
+
+  // 가입하기
+  const join = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await API.post("/accounts/signup/", {
+        username: id,
+        password: pw,
+        password2: pwCheck,
+        phone_number: phoneNum,
+        name: name,
+      });
+      console.log(res);
+      if (res.status === 201) {
+        successJoin();
+      }
+    } catch (error) {
+      console.error(error);
+      setPhoneNumMessage("휴대폰번호를 다시 확인해 주세요.");
+    }
+  };
+
+  // 회원가입 성공 시 로그인 페이지로 이동
+  const successJoin = () => {
+    navigate("/login");
   };
 
   return (
@@ -239,6 +268,7 @@ export default function JoinForm() {
               ? "active"
               : "disabled"
           }
+          onClick={join}
         >
           가입하기
         </JoinBtn>
