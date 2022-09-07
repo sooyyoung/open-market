@@ -142,7 +142,7 @@ export default function JoinForm() {
             setIdMessage("");
           }}
         />
-        <button className="idCheck" type="button" onClick={handleCheckId}>
+        <button className="check" type="button" onClick={handleCheckId}>
           중복확인
         </button>
         <Message isId={isId}>{idMessage}</Message>

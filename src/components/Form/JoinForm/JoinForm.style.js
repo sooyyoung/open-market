@@ -32,7 +32,7 @@ export const JoinContainer = styled.section`
         background: url(${checkOff}) no-repeat right 15px center;
       }
     }
-    .idCheck {
+    .check {
       width: 120px;
       height: 55px;
       float: right;
