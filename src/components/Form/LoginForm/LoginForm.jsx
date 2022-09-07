@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FormHeader from "./FormHeader";
+import FormHeader from "../FormHeader";
 import { LoginContainer, Message } from "./LoginForm.style";
 
 export default function LoginForm() {

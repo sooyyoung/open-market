@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header/Header";
-import LoginForm from "../components/Form/LoginForm";
+import LoginForm from "../components/Form/LoginForm/LoginForm";
 
 export default function Login() {
   return (
