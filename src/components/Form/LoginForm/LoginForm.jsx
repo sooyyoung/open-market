@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import API from "../../../api/api";
 import FormHeader from "../FormHeader";
 import { LoginContainer, Message } from "./LoginForm.style";
 
 export default function LoginForm() {
+  const location = useLocation();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
 
@@ -10,13 +13,32 @@ export default function LoginForm() {
   const [idMessage, setIdMessage] = useState("");
   const [pwMessage, setPwMessage] = useState("");
 
-  const login = (e) => {
+  // state 초기값 설정
+  if (location.state === null) {
+    location.state = "BUYER";
+  }
+  const loginType = location.state;
+
+  // 로그인
+  const login = async (e) => {
     e.preventDefault();
 
-    if (id === "") {
-      setIdMessage("아이디를 입력해주세요.");
-    } else if (pw === "") {
-      setPwMessage("비밀번호를 입력해주세요.");
+    try {
+      const res = await API.post("/accounts/login/", {
+        username: id,
+        password: pw,
+        login_type: loginType,
+      });
+      console.log(res);
+    } catch (error) {
+      if (id === "") {
+        setIdMessage("아이디를 입력해주세요.");
+      } else if (pw === "") {
+        setPwMessage("비밀번호를 입력해주세요.");
+      } else {
+        setPwMessage("아이디 또는 비밀번호가 일치하지 않습니다.");
+        console.error(error);
+      }
     }
   };
 
