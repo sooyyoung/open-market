@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function FormHeader({ buyer, seller }) {
@@ -11,12 +12,16 @@ export default function FormHeader({ buyer, seller }) {
 
   return (
     <TapBtn>
-      <button onClick={handleClick} className={tabBtn ? "on" : "disabled"}>
-        {buyer}
-      </button>
-      <button onClick={handleClick} className={tabBtn ? "disabled" : "on"}>
-        {seller}
-      </button>
+      <Link to="" state={"BUYER"}>
+        <button onClick={handleClick} className={tabBtn ? "on" : "disabled"}>
+          {buyer}
+        </button>
+      </Link>
+      <Link to="" state={"SELLER"}>
+        <button onClick={handleClick} className={tabBtn ? "disabled" : "on"}>
+          {seller}
+        </button>
+      </Link>
     </TapBtn>
   );
 }
