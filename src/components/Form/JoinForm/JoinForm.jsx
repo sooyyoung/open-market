@@ -111,7 +111,7 @@ export default function JoinForm() {
         phone_number: phoneNum,
         name: name,
       });
-      console.log(res);
+      // console.log(res);
       if (res.status === 201) {
         successJoin();
       }
