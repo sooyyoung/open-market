@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import checkOff from "../../assets/check-off.svg";
-import checkOn from "../../assets/check-on.svg";
+import checkOff from "../../../assets/check-off.svg";
+import checkOn from "../../../assets/check-on.svg";
 
 export const JoinContainer = styled.section`
   form {
