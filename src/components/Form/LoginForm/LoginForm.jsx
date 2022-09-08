@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import API from "../../../api/api";
 import FormHeader from "../FormHeader";
 import { LoginContainer, Message } from "./LoginForm.style";
 
 export default function LoginForm() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
 
@@ -31,6 +32,7 @@ export default function LoginForm() {
       });
       // console.log(res);
       localStorage.setItem("token", `JWT ${res.data.token}`);
+      successLogin();
     } catch (error) {
       if (id === "") {
         setIdMessage("아이디를 입력해주세요.");
@@ -41,6 +43,11 @@ export default function LoginForm() {
         console.error(error);
       }
     }
+  };
+
+  // 로그인 성공 시 메인 페이지로 이동
+  const successLogin = () => {
+    navigate("/");
   };
 
   return (
