@@ -29,7 +29,8 @@ export default function LoginForm() {
         password: pw,
         login_type: loginType,
       });
-      console.log(res);
+      // console.log(res);
+      localStorage.setItem("token", `JWT ${res.data.token}`);
     } catch (error) {
       if (id === "") {
         setIdMessage("아이디를 입력해주세요.");
