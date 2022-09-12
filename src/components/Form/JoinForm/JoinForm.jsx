@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import API from "../../../api/api";
 import FormHeader from "../FormHeader";
+import SellerJoinForm from "./SellerJoinForm";
 import { JoinContainer, AcceptCheck, JoinBtn, Message } from "./JoinForm.style";
 
 export default function JoinForm() {
+  const location = useLocation();
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
@@ -26,6 +28,9 @@ export default function JoinForm() {
   const [isPw, setIsPw] = useState(false);
   const [isPwCheck, setIsPwCheck] = useState(false);
   const [acceptCheckBox, setAcceptCheckBox] = useState(false);
+
+  // 판매회원가입 - 사업자 등록번호 & 스토어 이름 입력 위한 state
+  const loginType = location.state;
 
   // 아이디 중복확인
   const handleCheckId = async () => {
@@ -231,6 +236,8 @@ export default function JoinForm() {
         <input type="text" id="email" className="email" />
         <span className="at">@</span>
         <input type="text" className="email" />
+
+        {loginType === "SELLER" && <SellerJoinForm />}
 
         <AcceptCheck>
           <input
