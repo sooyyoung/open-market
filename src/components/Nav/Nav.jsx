@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import shoppingCartIcon from "../../assets/shopping-cart.svg";
 import shoppingBagIcon from "../../assets/shopping-bag.svg";
@@ -7,8 +7,7 @@ import userIcon from "../../assets/user.svg";
 import { Header, Inner, H1, Search, NavBtn } from "./Nav.style";
 
 export default function Nav() {
-  const location = useLocation();
-  const loginType = location.state;
+  const loginType = localStorage.getItem("login_type");
 
   return (
     <Header>
@@ -29,7 +28,7 @@ export default function Nav() {
           <span>장바구니</span>
         </NavBtn>
         {loginType ? (
-          loginType.loginType === "BUYER" ? (
+          loginType === "BUYER" ? (
             <Link to="/myPage">
               <NavBtn className="userBtn">
                 <img src={userIcon} alt="마이페이지" />

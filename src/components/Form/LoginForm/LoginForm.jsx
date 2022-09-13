@@ -32,6 +32,7 @@ export default function LoginForm() {
       });
       // console.log(res);
       localStorage.setItem("token", `JWT ${res.data.token}`);
+      localStorage.setItem("login_type", loginType);
       successLogin();
     } catch (error) {
       if (id === "") {
@@ -47,11 +48,7 @@ export default function LoginForm() {
 
   // 로그인 성공 시 메인 페이지로 이동
   const successLogin = () => {
-    navigate("/", {
-      state: {
-        loginType: loginType,
-      },
-    });
+    navigate("/");
   };
 
   return (
