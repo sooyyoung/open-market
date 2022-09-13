@@ -1,5 +1,9 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import searchIcon from "../../assets/search.svg";
+import shoppingCartIcon from "../../assets/shopping-cart.svg";
+import shoppingBagIcon from "../../assets/shopping-bag.svg";
+import userIcon from "../../assets/user.svg";
 
 export const Header = styled.header`
   position: relative;
@@ -44,35 +48,36 @@ export const Search = styled.div`
   }
 `;
 
-export const NavBtn = styled.button`
-  width: 55px;
+export const NavBtn = styled(Link)`
+  width: 52px;
   height: 50px;
+  text-align: center;
+  span {
+    display: block;
+    margin-top: 36px;
+    font-size: 12px;
+    color: #767676;
+  }
   &.cartBtn {
     margin-left: auto;
+    background: url(${shoppingCartIcon}) no-repeat top;
   }
   &.userBtn {
-    margin: 0 0 auto 15px;
+    margin: 0 0 auto 25px;
+    background: url(${userIcon}) no-repeat top;
   }
   &.sellerBtn {
     width: 158px;
-    height: 52px;
-    margin-left: 20px;
+    height: 50px;
+    margin-left: 25px;
     border-radius: 5px;
-    background-color: royalblue;
-    display: flex;
-    align-items: center;
-    img {
-      margin: 0 8px 0 20px;
-    }
+    background: url(${shoppingBagIcon}) no-repeat 18px center royalblue;
     span {
+      margin-top: 0;
       font-size: 16px;
       color: #fff;
+      text-indent: 40px;
+      line-height: 52px;
     }
-  }
-  span {
-    margin-top: 1px;
-    display: block;
-    font-size: 12px;
-    color: #767676;
   }
 `;
