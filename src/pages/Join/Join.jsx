@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../components/Header/Header";
-import JoinForm from "../components/Form/JoinForm/JoinForm";
+import Header from "../../components/Header/Header";
+import JoinForm from "../../components/Form/JoinForm/JoinForm";
 
 export default function Join() {
   return (

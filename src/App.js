@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Join from "./pages/Join";
-import SellerCenter from "./pages/SellerCenter";
-import NotFound from "./pages/NotFound";
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Join from "./pages/Join/Join";
+import SellerCenter from "./pages/SellerCenter/SellerCenter";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   return (
