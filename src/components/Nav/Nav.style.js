@@ -53,6 +53,22 @@ export const NavBtn = styled.button`
   &.userBtn {
     margin: 0 0 auto 15px;
   }
+  &.sellerBtn {
+    width: 158px;
+    height: 52px;
+    margin-left: 20px;
+    border-radius: 5px;
+    background-color: royalblue;
+    display: flex;
+    align-items: center;
+    img {
+      margin: 0 8px 0 20px;
+    }
+    span {
+      font-size: 16px;
+      color: #fff;
+    }
+  }
   span {
     margin-top: 1px;
     display: block;
