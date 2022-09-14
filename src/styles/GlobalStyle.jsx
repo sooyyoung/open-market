@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     table {
-        border-collapse: inherit;
+        border-collapse: collapse;
         border-spacing: 0;
     }
     
