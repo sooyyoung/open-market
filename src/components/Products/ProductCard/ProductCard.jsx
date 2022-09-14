@@ -1,28 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import API from "../../../api/api";
 import { Container, Product } from "./ProductCard.style";
 
 export default function ProductCard() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProductList();
+  }, []);
+
+  const getProductList = async () => {
+    try {
+      const res = await API.get("/products/");
+      const product = res.data.results;
+      setProducts(product);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <Container>
-        <Product>
-          <img src="" alt="" />
-          <span>00 마켓</span>
-          <p>0000 0000</p>
-          <strong>00,000</strong>원
-        </Product>
-        <Product>
-          <img src="" alt="" />
-          <span>00 마켓</span>
-          <p>0000 0000</p>
-          <strong>00,000</strong>원
-        </Product>
-        <Product>
-          <img src="" alt="" />
-          <span>00 마켓</span>
-          <p>0000 0000</p>
-          <strong>00,000</strong>원
-        </Product>
+        {products.map((item, index) => {
+          return (
+            <Product key={index}>
+              <img src={item.image} alt="" />
+              <span>{item.seller_store}</span>
+              <p>{item.product_name}</p>
+              <strong>{item.price}</strong>원
+            </Product>
+          );
+        })}
       </Container>
     </>
   );
