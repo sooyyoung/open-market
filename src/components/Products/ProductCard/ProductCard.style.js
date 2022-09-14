@@ -14,12 +14,13 @@ export const Product = styled.div`
   img {
     width: 380px;
     height: 380px;
-    margin-bottom: 16px;
+    margin-bottom: 15px;
     border: 1px solid #c4c4c4;
     border-radius: 10px;
   }
   span {
-    margin-bottom: 10px;
+    display: block;
+    margin-bottom: 5px;
     color: #767676;
     font-size: 16px;
   }
