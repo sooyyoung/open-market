@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import BasicNav from "../../components/Nav/BasicNav";
 import image from "../../assets/img.svg";
 import {
@@ -11,13 +12,20 @@ import {
 } from "./SellerCenter.style";
 
 export default function SellerCenter() {
+  const navigate = useNavigate();
+
+  // 상품 업로드 페이지로 이동
+  const moveProductUpload = () => {
+    navigate("/productUpload");
+  };
+
   return (
     <>
       <BasicNav />
       <Main>
         <h2 className="ir">판매자 센터</h2>
         <strong>대시보드</strong>
-        <UploadBtn>상품 업로드</UploadBtn>
+        <UploadBtn onClick={moveProductUpload}>상품 업로드</UploadBtn>
 
         <Dashboard>
           <TabMenu>
