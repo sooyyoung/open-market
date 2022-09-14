@@ -28,7 +28,7 @@ export default function ProductCard() {
               <img src={item.image} alt="" />
               <span>{item.seller_store}</span>
               <p>{item.product_name}</p>
-              <strong>{item.price}</strong>원
+              <strong>{item.price.toLocaleString()}</strong>원
             </Product>
           );
         })}
