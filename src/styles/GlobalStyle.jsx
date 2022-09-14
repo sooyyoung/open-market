@@ -13,6 +13,11 @@ const GlobalStyle = createGlobalStyle`
     ol, ul, li {
         list-style: none;
     }
+
+    table {
+        border-collapse: inherit;
+        border-spacing: 0;
+    }
     
     a {
         text-decoration: none;
