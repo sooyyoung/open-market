@@ -1,7 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 import Prev from "../../assets/swiper-1.svg";
 import Next from "../../assets/swiper-2.svg";
+import { Container } from "./Banner.style";
 
 export default function Banner() {
   return (
@@ -15,14 +15,3 @@ export default function Banner() {
     </Container>
   );
 }
-
-const Container = styled.section`
-  width: 100%;
-  height: 500px;
-  background: #f2f2f2;
-  display: flex;
-  justify-content: space-between;
-  button {
-    padding: 0 20px;
-  }
-`;
