@@ -8,6 +8,7 @@ import userIcon from "../../assets/user.svg";
 export const Header = styled.header`
   position: relative;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 `;
 
 export const Inner = styled.div`
