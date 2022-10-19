@@ -17,6 +17,7 @@ export const Product = styled.div`
     margin-bottom: 15px;
     border: 1px solid #c4c4c4;
     border-radius: 10px;
+    cursor: pointer;
   }
   span {
     display: block;

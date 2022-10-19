@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Join from "./pages/Join/Join";
 import SellerCenter from "./pages/SellerCenter/SellerCenter";
+import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import ProductUpload from "./pages/ProductUpload/ProductUpload";
 import NotFound from "./pages/NotFound/NotFound";
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/join" element={<Join />} />
           <Route path="/sellerCenter" element={<SellerCenter />} />
+          <Route path="/productDetails" element={<ProductDetails />} />
           <Route path="/productUpload" element={<ProductUpload />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
