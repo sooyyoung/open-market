@@ -47,7 +47,7 @@ export const JoinContainer = styled.section`
       margin-left: 12px;
     }
     .email {
-      width: calc((100% - 35px) / 2);
+      width: calc((100% - 36px) / 2);
     }
     .at {
       margin: 0 10px;
@@ -59,13 +59,12 @@ export const AcceptCheck = styled.section`
   padding: 35px;
   font-size: 16px;
   color: #767676;
+  display: flex;
   input {
     width: 18px;
     height: 18px;
     margin-right: 12px;
-  }
-  label {
-    vertical-align: top;
+    vertical-align: middle;
   }
 `;
 

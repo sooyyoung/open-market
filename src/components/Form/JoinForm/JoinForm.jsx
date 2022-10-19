@@ -240,12 +240,9 @@ export default function JoinForm() {
         {loginType === "SELLER" && <SellerJoinForm />}
 
         <AcceptCheck>
-          <input
-            type="checkbox"
-            id="acceptCheck"
-            className="acceptCheck"
-            onClick={handleClickAcceptCheck}
-          />
+          <div>
+            <input type="checkbox" id="acceptCheck" className="acceptCheck" onClick={handleClickAcceptCheck} />
+          </div>
           <label htmlFor="acceptCheck">
             <strong>
               <u>이용약관</u>
