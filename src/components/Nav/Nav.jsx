@@ -20,7 +20,7 @@ export default function Nav() {
             <span className="ir">검색하기</span>
           </button>
         </Search>
-        <NavBtn to="" className="cartBtn">
+        <NavBtn to="/shoppingCart" className="cartBtn">
           <span>장바구니</span>
         </NavBtn>
         {loginType ? (
