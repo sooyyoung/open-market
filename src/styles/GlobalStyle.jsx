@@ -4,6 +4,7 @@ const GlobalStyle = createGlobalStyle`
     * {
         margin: 0;
         padding: 0;
+        font-family: "Noto Sans KR", sans-serif;
     }
 
     h1, a, div, p, header, section, article, input, textarea {
