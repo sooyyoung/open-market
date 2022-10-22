@@ -12,9 +12,11 @@ export const Inner = styled.div`
 `;
 
 export const FooterNav = styled.ul`
+  display: inline-block;
   font-size: 14px;
   li {
     display: inline-block;
+    vertical-align: middle;
     &::after {
       content: "|";
       margin: 0 14px;
@@ -23,4 +25,19 @@ export const FooterNav = styled.ul`
       content: "";
     }
   }
+`;
+
+export const Sns = styled.ul`
+  display: flex;
+  gap: 15px;
+  float: right;
+`;
+
+export const FooterInfo = styled.div`
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid #c4c4c4;
+  font-size: 14px;
+  line-height: 24px;
+  color: #767676;
 `;
