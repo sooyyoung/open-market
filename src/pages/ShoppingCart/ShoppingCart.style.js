@@ -6,18 +6,6 @@ export const Container = styled.section`
   h2 {
     text-align: center;
   }
-  .notice {
-    margin-top: 200px;
-    text-align: center;
-    p {
-      font-size: 18px;
-      font-weight: bold;
-    }
-    span {
-      font-size: 14px;
-      color: #767676;
-    }
-  }
 `;
 
 export const Tab = styled.div`
@@ -34,5 +22,18 @@ export const Tab = styled.div`
   input[type="checkbox"] {
     width: 18px;
     height: 18px;
+  }
+`;
+
+export const Notice = styled.div`
+  margin-top: 200px;
+  text-align: center;
+  p {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  span {
+    font-size: 14px;
+    color: #767676;
   }
 `;

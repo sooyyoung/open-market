@@ -1,6 +1,6 @@
 import React from "react";
 import Nav from "../../components/Nav/Nav";
-import { Container, Tab } from "./ShoppingCart.style";
+import { Container, Tab, Notice } from "./ShoppingCart.style";
 
 export default function ShoppingCart() {
   return (
@@ -17,10 +17,10 @@ export default function ShoppingCart() {
           <span>상품금액</span>
         </Tab>
 
-        <div className="notice">
+        <Notice>
           <p>장바구니에 담긴 상품이 없습니다.</p>
           <span>원하는 상품을 장바구니에 담아보세요!</span>
-        </div>
+        </Notice>
       </Container>
     </>
   );
