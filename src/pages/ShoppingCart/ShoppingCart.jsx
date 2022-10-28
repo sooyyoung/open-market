@@ -9,12 +9,12 @@ export default function ShoppingCart() {
       <Container>
         <h2>장바구니</h2>
         <Tab>
-          <th>
+          <span>
             <input type="checkbox" />
-          </th>
-          <th>상품정보</th>
-          <th>수량</th>
-          <th>상품금액</th>
+          </span>
+          <span>상품정보</span>
+          <span>수량</span>
+          <span>상품금액</span>
         </Tab>
 
         <div className="notice">

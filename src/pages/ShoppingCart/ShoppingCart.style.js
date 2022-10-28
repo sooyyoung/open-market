@@ -20,17 +20,19 @@ export const Container = styled.section`
   }
 `;
 
-export const Tab = styled.table`
+export const Tab = styled.div`
   width: 100%;
   height: 60px;
   margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 130px 0 30px;
   border-radius: 10px;
   background-color: #f2f2f2;
   font-size: 18px;
-  vertical-align: middle;
+  line-height: 60px;
   input[type="checkbox"] {
     width: 18px;
     height: 18px;
-    vertical-align: middle;
   }
 `;
