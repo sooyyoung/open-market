@@ -122,3 +122,43 @@ export const DeleteBtn = styled.button`
   top: 15px;
   right: 15px;
 `;
+
+export const CartPrice = styled.div`
+  width: 100%;
+  height: 150px;
+  margin: 80px 0 40px;
+  padding: 50px 110px;
+  background: #f2f2f2;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  img {
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 5px solid #fff;
+  }
+  strong {
+    display: block;
+    font-size: 18px;
+    margin-top: 5px;
+  }
+  .price {
+    font-size: 26px;
+    color: #007aff;
+  }
+`;
+
+export const PaymentBtn = styled.button`
+  width: 200px;
+  height: 65px;
+  border-radius: 5px;
+  background-color: #007aff;
+  color: #fff;
+  font-size: 20px;
+  margin: 0 auto;
+  display: block;
+`;

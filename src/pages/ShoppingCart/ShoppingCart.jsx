@@ -1,6 +1,8 @@
 import React from "react";
 import Nav from "../../components/Nav/Nav";
 import deleteIcon from "../../assets/delete.svg";
+import plusIcon from "../../assets/icon-plus.svg";
+import minusIcon from "../../assets/icon-minus.svg";
 import {
   Container,
   Tab,
@@ -9,7 +11,9 @@ import {
   ItemInfo,
   AmountBtn,
   ItemPrice,
-  DeleteBtn
+  DeleteBtn,
+  CartPrice,
+  PaymentBtn,
 } from "./ShoppingCart.style";
 
 export default function ShoppingCart() {
@@ -56,6 +60,29 @@ export default function ShoppingCart() {
             <img src={deleteIcon} alt="" />
           </DeleteBtn>
         </CartItem>
+
+        <CartPrice>
+          <p>
+            총 상품금액
+            <strong>00,000원</strong>
+          </p>
+          <img src={minusIcon} alt="" />
+          <p>
+            상품 할인
+            <strong>0원</strong>
+          </p>
+          <img src={plusIcon} alt="" />
+          <p>
+            배송비
+            <strong>0원</strong>
+          </p>
+          <p>
+            결제 예정 금액
+            <strong className="price">00,000원</strong>
+          </p>
+        </CartPrice>
+
+        <PaymentBtn>주문하기</PaymentBtn>
       </Container>
     </>
   );
