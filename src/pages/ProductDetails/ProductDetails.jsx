@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import API from "../../api/api";
 import Nav from "../../components/Nav/Nav";
 import {
   Container,
@@ -10,16 +12,42 @@ import {
 } from "./ProductDetails.style";
 
 export default function ProductDetails() {
+  const [productImage, setProductImage] = useState();
+  const [store, setStore] = useState();
+  const [productName, setProductName] = useState();
+  const [productPrice, setProductPrice] = useState();
+
+  const location = useLocation();
+  const productId = location.search.split("?")[1];
+
+  useEffect(() => {
+    getProduct();
+  }, []);
+
+  const getProduct = async () => {
+    try {
+      const res = await API.get(`/products/${productId}/`);
+      const product = res.data;
+      setProductImage(product.image);
+      setStore(product.store_name);
+      setProductName(product.product_name);
+      setProductPrice(product.price);
+      console.log(product);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <Nav />
       <Container>
-        <img src="https://via.placeholder.com/600" alt="" />
+        <img src={productImage} alt="" />
         <Details>
           <ProductInfo>
-            <span>상품 판매자</span>
-            <p>상품명</p>
-            <strong>가격</strong>원
+            <span>{store}</span>
+            <p>{productName}</p>
+            <strong>{productPrice}</strong>원
             <span className="delivery">택배배송 / 무료배송</span>
           </ProductInfo>
 
@@ -33,7 +61,7 @@ export default function ProductDetails() {
             <p>총 상품 금액</p>
             <span>총 수량 1개</span>
             <span className="verticalBar">|</span>
-            <strong>17,500</strong>원
+            <strong>{productPrice}</strong>원
           </ProductPrice>
 
           <Button BuyBtn>바로 구매</Button>
