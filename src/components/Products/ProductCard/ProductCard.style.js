@@ -19,17 +19,19 @@ export const Product = styled.div`
     border-radius: 10px;
     cursor: pointer;
   }
+  p {
+    display: inline-block;
+    margin: 6px 0 8px;
+    font-size: 18px;
+  }
   span {
     display: block;
-    margin-bottom: 5px;
     color: #767676;
-    font-size: 16px;
-  }
-  p {
-    margin-bottom: 10px;
-    font-size: 18px;
   }
   strong {
     font-size: 24px;
+  }
+  .price {
+    color: #000;
   }
 `;
