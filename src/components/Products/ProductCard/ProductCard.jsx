@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import API from "../../../api/api";
 import { Container, Product } from "./ProductCard.style";
 
 export default function ProductCard() {
   const [products, setProducts] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     getProductList();
@@ -21,21 +20,25 @@ export default function ProductCard() {
     }
   };
 
-  // 상품 이미지 클릭 시 상세 페이지로 이동
-  const moveProductDetails = () => {
-    navigate(`/productDetails`);
-  };
-
   return (
     <>
       <Container>
         {products.map((item, index) => {
           return (
             <Product key={index}>
-              <img src={item.image} alt="" onClick={moveProductDetails} />
-              <span>{item.seller_store}</span>
+              <Link
+                to={{
+                  pathname: `/productDetails`,
+                  search: `${item.product_id}`,
+                }}
+              >
+                <img src={item.image} alt="" />
+              </Link>
+              <span>{item.store_name}</span>
               <p>{item.product_name}</p>
-              <strong>{item.price.toLocaleString()}</strong>원
+              <span className="price">
+                <strong>{item.price.toLocaleString()}</strong>원
+              </span>
             </Product>
           );
         })}
