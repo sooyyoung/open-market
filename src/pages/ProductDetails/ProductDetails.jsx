@@ -32,7 +32,6 @@ export default function ProductDetails() {
       setStore(product.store_name);
       setProductName(product.product_name);
       setProductPrice(product.price);
-      console.log(product);
     } catch (error) {
       console.error(error);
     }
