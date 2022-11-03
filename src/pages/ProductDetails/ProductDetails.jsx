@@ -16,6 +16,9 @@ export default function ProductDetails() {
   const [store, setStore] = useState();
   const [productName, setProductName] = useState();
   const [productPrice, setProductPrice] = useState();
+  const [price, setPrice] = useState(); // 가격 천 단위 콤마 표시
+  const [quantity, setQuantity] = useState(1);
+  const totalPrice = (productPrice * quantity).toLocaleString();
 
   const location = useLocation();
   const productId = location.search.split("?")[1];
@@ -31,10 +34,20 @@ export default function ProductDetails() {
       setProductImage(product.image);
       setStore(product.store_name);
       setProductName(product.product_name);
-      setProductPrice(product.price.toLocaleString());
+      setProductPrice(product.price);
+      setPrice(product.price.toLocaleString()); // 가격 천 단위 콤마 표시
     } catch (error) {
       console.error(error);
     }
+  };
+
+  // +, - 버튼
+  const quantityMinus = () => {
+    setQuantity((current) => (current > 1 ? current - 1 : 1));
+  };
+
+  const quantityPlus = () => {
+    setQuantity(quantity + 1);
   };
 
   return (
@@ -48,21 +61,25 @@ export default function ProductDetails() {
           <ProductInfo>
             <span>{store}</span>
             <p>{productName}</p>
-            <strong>{productPrice}</strong>원
+            <strong>{price}</strong>원
             <span className="delivery">택배배송 / 무료배송</span>
           </ProductInfo>
 
           <AmountBtn>
-            <button className="minus">-</button>
-            <span>1</span>
-            <button className="plus">+</button>
+            <button className="minus" onClick={quantityMinus}>
+              -
+            </button>
+            <span>{quantity}</span>
+            <button className="plus" onClick={quantityPlus}>
+              +
+            </button>
           </AmountBtn>
 
           <ProductPrice>
             <p>총 상품 금액</p>
-            <span>총 수량 1개</span>
+            <span>총 수량 {quantity}개</span>
             <span className="verticalBar">|</span>
-            <strong>{productPrice}</strong>원
+            <strong>{totalPrice}</strong>원
           </ProductPrice>
 
           <Button BuyBtn>바로 구매</Button>
