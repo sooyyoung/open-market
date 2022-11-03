@@ -34,7 +34,7 @@ export const ProductInfo = styled.section`
     font-size: 36px;
   }
   .delivery {
-    margin: 138px 0 20px;
+    margin: 130px 0 20px;
     font-size: 16px;
   }
 `;
@@ -65,7 +65,7 @@ export const AmountBtn = styled.section`
 `;
 
 export const ProductPrice = styled.section`
-  padding-top: 45px;
+  padding-top: 40px;
   display: flex;
   border-top: 2px solid #c4c4c4;
   font-size: 18px;
@@ -83,6 +83,8 @@ export const ProductPrice = styled.section`
   strong {
     font-size: 36px;
     color: #007aff;
+    line-height: 20px;
+    margin-bottom: 30px;
   }
 `;
 
