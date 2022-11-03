@@ -107,3 +107,29 @@ export const Button = styled.button`
     }
   }}
 `;
+
+export const ProductDescription = styled.section`
+  max-width: 1280px;
+  margin: 100px auto;
+  ul {
+    display: flex;
+  }
+  ul li {
+    width: calc(100% / 4);
+    height: 60px;
+    line-height: 60px;
+    color: #767676;
+    text-align: center;
+    border-bottom: 5px solid #e0e0e0;
+    cursor: pointer;
+    &.active {
+      border-bottom: 5px solid #007aff;
+      color: #007aff;
+    }
+  }
+  div {
+    height: 100px;
+    padding: 25px 20px;
+    font-size: 18px;
+  }
+`;
