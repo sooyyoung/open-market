@@ -41,7 +41,9 @@ export default function ProductDetails() {
     <>
       <Nav />
       <Container>
-        <img src={productImage} alt="" />
+        <div>
+          <img src={productImage} alt="" />
+        </div>
         <Details>
           <ProductInfo>
             <span>{store}</span>
