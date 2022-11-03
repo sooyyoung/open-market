@@ -31,7 +31,7 @@ export default function ProductDetails() {
       setProductImage(product.image);
       setStore(product.store_name);
       setProductName(product.product_name);
-      setProductPrice(product.price);
+      setProductPrice(product.price.toLocaleString());
     } catch (error) {
       console.error(error);
     }
