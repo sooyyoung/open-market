@@ -38,7 +38,7 @@ export default function JoinForm() {
     const resultId = regExp.test(id);
 
     try {
-      const res = await API.post("/accounts/signup/valid/", { username: id });
+      const res = await API.post("/accounts/signup/valid/username/", { username: id });
       if (res.status === 202) {
         setIdMessage("멋진 아이디네요 :)");
         setIsId(true);
