@@ -5,7 +5,13 @@ import { Header, Inner, H1, Search, NavBtn } from "./Nav.style";
 
 export default function Nav() {
   const loginType = localStorage.getItem("login_type");
-
+  
+  const logout = () => {
+    window.localStorage.removeItem("login_type");
+    window.localStorage.removeItem("token");
+    window.location.reload();
+  }
+ 
   return (
     <Header>
       <Inner>
@@ -25,8 +31,8 @@ export default function Nav() {
         </NavBtn>
         {loginType ? (
           loginType === "BUYER" ? (
-            <NavBtn to="/myPage" className="userBtn">
-              <span>마이페이지</span>
+            <NavBtn to="" className="userBtn" onClick={logout}>
+              <span>로그아웃</span>
             </NavBtn>
           ) : (
             <NavBtn to="/sellerCenter" className="sellerBtn">
