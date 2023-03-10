@@ -18,9 +18,11 @@ export default function ProductDetails() {
   const [productName, setProductName] = useState();
   const [productPrice, setProductPrice] = useState();
   const [productInfo, setProductInfo] = useState();
+  const [shippingFee, setShippingFee] = useState();
   const [price, setPrice] = useState(); // 가격 천 단위 콤마 표시
   const [quantity, setQuantity] = useState(1);
   const totalPrice = (productPrice * quantity).toLocaleString();
+  const [check, setCheck] = useState(true);
   let [tab, setTab] = useState(0);
 
   const location = useLocation();
@@ -32,22 +34,38 @@ export default function ProductDetails() {
 
   const getProduct = async () => {
     try {
-      await API.get(`/products/${productId}/`)
-        .then(res => {
-          setProductImage(res.data.image);
-          setStore(res.data.store_name);
-          setProductName(res.data.product_name);
-          setProductInfo(res.data.product_info);
-          setProductPrice(res.data.price);
-          setPrice(res.data.price.toLocaleString()); // 가격 천 단위 콤마 표시
-        })
-        .catch(error => {
-          console.log(error);
-        })
+      const res = await API.get(`/products/${productId}/`);
+      setProductImage(res.data.image);
+      setStore(res.data.store_name);
+      setProductName(res.data.product_name);
+      setProductInfo(res.data.product_info);
+      setShippingFee(res.data.shipping_fee);
+      setProductPrice(res.data.price);
+      setPrice(res.data.price.toLocaleString()); // 가격 천 단위 콤마 표시
     } catch (error) {
       console.error(error);
     }
   };
+
+  const goCart = async () => {
+    try {
+        const res = await API.post("/cart/", {
+            product_id: productId, 
+            quantity: quantity,
+            check : check
+        }, {
+            headers: {
+                Authorization: window.localStorage.getItem("token"),
+            }
+        });
+        if (res.status === 201) {
+            alert("장바구니에 상품이 담겼습니다.")
+        }
+    } catch (error) {
+        alert("현재 재고보다 더 많은 수량을 담을 수 없습니다.")
+        console.log(error);
+    }
+  }
 
   // +, - 버튼
   const quantityMinus = () => {
@@ -80,7 +98,7 @@ export default function ProductDetails() {
             <span>{store}</span>
             <p>{productName}</p>
             <strong>{price}</strong>원
-            <span className="delivery">택배배송 / 무료배송</span>
+            <span className="delivery">택배배송 / {shippingFee}</span>
           </ProductInfo>
 
           <AmountBtn>
@@ -101,7 +119,7 @@ export default function ProductDetails() {
           </ProductPrice>
 
           <Button BuyBtn>바로 구매</Button>
-          <Button CartBtn>장바구니</Button>
+          <Button CartBtn onClick={goCart}>장바구니</Button>
         </Details>
       </Container>
 
@@ -110,26 +128,22 @@ export default function ProductDetails() {
           <li
             onClick={() => {changeTab(0)}}
             className={tab === 0 ? "active" : null}
-          >
-            상품 설명
+          > 상품 설명
           </li>
           <li
             onClick={() => {changeTab(1)}}
             className={tab === 1 ? "active" : null}
-          >
-            리뷰
+          > 리뷰
           </li>
           <li
             onClick={() => {changeTab(2)}}
             className={tab === 2 ? "active" : null}
-          >
-            Q&A
+          > Q&A
           </li>
           <li
             onClick={() => {changeTab(3)}}
             className={tab === 3 ? "active" : null}
-          >
-            반품/교환정보
+          > 반품/교환정보
           </li>
         </ul>
         <div>{tabList[tab]}</div>
