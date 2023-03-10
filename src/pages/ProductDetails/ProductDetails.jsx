@@ -102,13 +102,9 @@ export default function ProductDetails() {
           </ProductInfo>
 
           <AmountBtn>
-            <button className="minus" onClick={quantityMinus}>
-              -
-            </button>
+            <button className="minus" onClick={quantityMinus}>-</button>
             <span>{quantity}</span>
-            <button className="plus" onClick={quantityPlus}>
-              +
-            </button>
+            <button className="plus" onClick={quantityPlus}>+</button>
           </AmountBtn>
 
           <ProductPrice>

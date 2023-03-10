@@ -51,6 +51,7 @@ export default function ShoppingCart() {
                     quantity={item.quantity}
                     productId={item.product_id}
                     cartItemId={item.cart_item_id}
+                    isActive={item.is_active}
                 />
             )
         }) :

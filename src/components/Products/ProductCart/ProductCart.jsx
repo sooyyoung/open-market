@@ -12,6 +12,8 @@ import {
 export default function ProductCart(props) {
     const [product, setProduct] = useState([]);
     const [price, setPrice] = useState(); 
+    const [quantity, setQuantity] = useState(props.quantity);
+    const totalPrice = (product.price * quantity).toLocaleString();
 
     useEffect(() => {
         getProduct();
@@ -26,6 +28,42 @@ export default function ProductCart(props) {
             console.error(error);
         }
     }
+
+    const quantityMinus = async () => {
+        setQuantity((current) => (current > 1 ? current - 1 : 1));
+        try {
+            const res = await API.put(`/cart/${props.cartItemId}/`, {
+                product_id: props.productId, 
+                quantity: quantity - 1,
+                is_active : props.isActive
+            }, {
+                headers: {
+                    Authorization: window.localStorage.getItem("token"),
+                }
+            });
+            // console.log(res.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const quantityPlus = async () => {
+        setQuantity(quantity + 1);
+        try {
+            const res = await API.put(`/cart/${props.cartItemId}/`, {
+                product_id: props.productId, 
+                quantity: quantity + 1,
+                is_active : props.isActive
+            }, {
+                headers: {
+                    Authorization: window.localStorage.getItem("token"),
+                }
+            });
+            // console.log(res.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const deleteItem = async () => {
         try {
@@ -57,12 +95,12 @@ export default function ProductCart(props) {
                 <span className="delivery">택배배송 / {product.shipping_fee}</span>
             </ItemInfo>
             <AmountBtn>
-                <button className="minus">-</button>
-                <span>{props.quantity}</span>
-                <button className="plus">+</button>
+                <button className="minus" onClick={quantityMinus}>-</button>
+                <span>{quantity}</span>
+                <button className="plus" onClick={quantityPlus}>+</button>
             </AmountBtn>
             <ItemPrice>
-                <strong>{price}원</strong>
+                <strong>{totalPrice}원</strong>
                 <button>주문하기</button>
             </ItemPrice>
             <DeleteBtn onClick={deleteItem}>
