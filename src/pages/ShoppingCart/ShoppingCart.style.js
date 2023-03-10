@@ -77,3 +77,13 @@ export const PaymentBtn = styled.button`
   margin: 0 auto 50px;
   display: block;
 `;
+
+export const DeleteBtn = styled.button`
+  width: 130px;
+  height: 40px;
+  margin: 10px 0;
+  float: right;
+  border-radius: 5px;
+  background-color: #767676;
+  color: #fff;
+`

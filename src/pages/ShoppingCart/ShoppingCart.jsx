@@ -10,10 +10,12 @@ import {
   Notice,
   CartPrice,
   PaymentBtn,
+  DeleteBtn
 } from "./ShoppingCart.style";
 
 export default function ShoppingCart() {
   const [cartItem, setCartItem] = useState("");
+  const [checkItem, setCheckItem] = useState([]);
 
   useEffect(() => {
     getCart();
@@ -32,13 +34,54 @@ export default function ShoppingCart() {
     }
   }
 
+  const handleCheckAll = (checked) => {
+    if (checked) {
+        const checkArray = [];
+        cartItem.forEach(el => {
+            checkArray.push(el.cart_item_id);
+        });
+        setCheckItem(checkArray);
+    } else {
+        setCheckItem([]);
+    }
+  }
+
+  const deleteItemAll = async () => {
+    if (!window.confirm("모든 상품을 삭제하시겠습니까?")) return
+    try {
+        const res = await API.delete(`/cart/`, {
+            headers: {
+                Authorization: window.localStorage.getItem("token")
+            },
+        });
+        alert("장바구니의 모든 상품이 삭제되었습니다.");
+        window.location.reload();
+    } catch (error) {
+        console.error(error);
+    }
+  }
+
   return (
     <>
       <Nav />
       <Container>
         <h2>장바구니</h2>
         <Tab>
-          <span><input type="checkbox" /></span>
+          <span>
+            <input 
+                type="checkbox" 
+                onChange={(e) => {
+                    handleCheckAll(e.target.checked);
+                }} 
+                checked={
+                    checkItem.length === 0 
+                        ? false 
+                        : cartItem.length === checkItem.length 
+                        ? true 
+                        : false
+                }
+            />
+        </span>
           <span>상품정보</span>
           <span>수량</span>
           <span>상품금액</span>
@@ -52,6 +95,8 @@ export default function ShoppingCart() {
                     productId={item.product_id}
                     cartItemId={item.cart_item_id}
                     isActive={item.is_active}
+                    checkItem={checkItem}
+                    setCheckItem={setCheckItem}
                 />
             )
         }) :
@@ -61,16 +106,21 @@ export default function ShoppingCart() {
         </Notice>
         }
         
-        <CartPrice>
-          <p>총 상품금액<strong>0원</strong></p>
-          <img src={minusIcon} alt="" />
-          <p>상품 할인<strong>0원</strong></p>
-          <img src={plusIcon} alt="" />
-          <p>배송비<strong>0원</strong></p>
-          <p>결제 예정 금액<strong className="price">0원</strong></p>
-        </CartPrice>
-
-        <PaymentBtn>주문하기</PaymentBtn>
+        {cartItem.length ? 
+        <>
+            <DeleteBtn onClick={deleteItemAll}>장바구니 비우기</DeleteBtn>
+            <CartPrice>
+                <p>총 상품금액<strong>0원</strong></p>
+                <img src={minusIcon} alt="" />
+                <p>상품 할인<strong>0원</strong></p>
+                <img src={plusIcon} alt="" />
+                <p>배송비<strong>0원</strong></p>
+                <p>결제 예정 금액<strong className="price">0원</strong></p>
+            </CartPrice>
+            <PaymentBtn>주문하기</PaymentBtn> 
+        </>
+        : ""
+        }
       </Container>
     </>
   );

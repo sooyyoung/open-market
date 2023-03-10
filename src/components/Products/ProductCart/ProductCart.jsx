@@ -11,9 +11,9 @@ import {
 
 export default function ProductCart(props) {
     const [product, setProduct] = useState([]);
-    const [price, setPrice] = useState(); 
+    const [price, setPrice] = useState(""); 
     const [quantity, setQuantity] = useState(props.quantity);
-    const totalPrice = (product.price * quantity).toLocaleString();
+    const totalPrice = (product.price * quantity);
 
     useEffect(() => {
         getProduct();
@@ -59,7 +59,6 @@ export default function ProductCart(props) {
                     Authorization: window.localStorage.getItem("token"),
                 }
             });
-            // console.log(res.data);
         } catch (error) {
             console.error(error);
         }
@@ -72,7 +71,6 @@ export default function ProductCart(props) {
                     Authorization: window.localStorage.getItem("token")
                 },
             });
-            // console.log(res);
             alert("장바구니의 상품이 삭제되었습니다.");
             window.location.reload();
         } catch (error) {
@@ -80,10 +78,24 @@ export default function ProductCart(props) {
         }
     }
 
+    const handleCheck = (checked) => {
+        if (checked) {
+            props.setCheckItem((prev) => [...prev, props.cartItemId]);
+        } else {
+            props.setCheckItem(props.checkItem.filter((el) => el !== props.cartItemId));
+        }
+    }
+
     return (
         <CartItem>
             <span className="checkbox">
-                <input type="checkbox" />
+                <input 
+                    type="checkbox"
+                    onChange={(e) => {
+                        handleCheck(e.target.checked);
+                    }}
+                    checked={props.checkItem.includes(props.cartItemId) ? true : false}
+                />
             </span>
             <div>
                 <img className="image" src={product.image} alt="" />
@@ -100,7 +112,7 @@ export default function ProductCart(props) {
                 <button className="plus" onClick={quantityPlus}>+</button>
             </AmountBtn>
             <ItemPrice>
-                <strong>{totalPrice}원</strong>
+                <strong>{totalPrice.toLocaleString()}원</strong>
                 <button>주문하기</button>
             </ItemPrice>
             <DeleteBtn onClick={deleteItem}>
