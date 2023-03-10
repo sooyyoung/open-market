@@ -44,20 +44,20 @@ export default function ShoppingCart() {
           <span>상품금액</span>
         </Tab>
 
-        {/* <Notice>
-          <p>장바구니에 담긴 상품이 없습니다.</p>
-          <span>원하는 상품을 장바구니에 담아보세요!</span>
-        </Notice> */}
-
-        {cartItem ? cartItem.map((item, index) => {
+        {cartItem.length ? cartItem.map((item, index) => {
             return (
                 <ProductCart 
                     key={index}
                     quantity={item.quantity}
                     productId={item.product_id}
+                    cartItemId={item.cart_item_id}
                 />
             )
-        }) : ""
+        }) :
+        <Notice>
+            <p>장바구니에 담긴 상품이 없습니다.</p>
+            <span>원하는 상품을 장바구니에 담아보세요!</span>
+        </Notice>
         }
         
         <CartPrice>

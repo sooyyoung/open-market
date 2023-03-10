@@ -26,7 +26,7 @@ export const Tab = styled.div`
 `;
 
 export const Notice = styled.div`
-  margin-top: 200px;
+  margin: 150px 0;
   text-align: center;
   p {
     font-size: 18px;

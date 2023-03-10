@@ -27,6 +27,21 @@ export default function ProductCart(props) {
         }
     }
 
+    const deleteItem = async () => {
+        try {
+            const res = await API.delete(`/cart/${props.cartItemId}/`, {
+                headers: {
+                    Authorization: window.localStorage.getItem("token")
+                },
+            });
+            // console.log(res);
+            alert("장바구니의 상품이 삭제되었습니다.");
+            window.location.reload();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <CartItem>
             <span className="checkbox">
@@ -50,7 +65,7 @@ export default function ProductCart(props) {
                 <strong>{price}원</strong>
                 <button>주문하기</button>
             </ItemPrice>
-            <DeleteBtn>
+            <DeleteBtn onClick={deleteItem}>
                 <img src={deleteIcon} alt="" />
             </DeleteBtn>
         </CartItem>
