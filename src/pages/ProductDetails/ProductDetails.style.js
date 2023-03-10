@@ -105,6 +105,13 @@ export const Button = styled.button`
       background-color: #767676;
       color: #fff;`;
     }
+    if (props.SoldOut) {
+      return `width: 100%;
+      float: right;
+      background-color: #767676;
+      color: #fff;
+      cursor: default;`
+    }
   }}
 `;
 

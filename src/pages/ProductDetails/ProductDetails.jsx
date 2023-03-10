@@ -23,6 +23,7 @@ export default function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
   const totalPrice = (productPrice * quantity).toLocaleString();
   const [check, setCheck] = useState(true);
+  const [soldout, setSoldout] = useState(true);
   let [tab, setTab] = useState(0);
 
   const location = useLocation();
@@ -42,6 +43,9 @@ export default function ProductDetails() {
       setShippingFee(res.data.shipping_fee);
       setProductPrice(res.data.price);
       setPrice(res.data.price.toLocaleString()); // 가격 천 단위 콤마 표시
+      if (res.data.stock === 0) {
+        setSoldout(false);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -62,7 +66,6 @@ export default function ProductDetails() {
             alert("장바구니에 상품이 담겼습니다.")
         }
     } catch (error) {
-        alert("현재 재고보다 더 많은 수량을 담을 수 없습니다.")
         console.log(error);
     }
   }
@@ -113,9 +116,15 @@ export default function ProductDetails() {
             <span className="verticalBar">|</span>
             <strong>{totalPrice}</strong>원
           </ProductPrice>
-
-          <Button BuyBtn>바로 구매</Button>
-          <Button CartBtn onClick={goCart}>장바구니</Button>
+          
+          {soldout ? 
+            <>
+                <Button BuyBtn>바로 구매</Button>
+                <Button CartBtn onClick={goCart}>장바구니</Button>
+            </>
+          : <Button SoldOut>품절</Button>
+          }
+          
         </Details>
       </Container>
 
