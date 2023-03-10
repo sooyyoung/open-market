@@ -4,10 +4,6 @@ import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import banner1 from "../../assets/banner1.jpg";
-import banner2 from "../../assets/banner2.jpg";
-import banner3 from "../../assets/banner3.jpg";
-import banner4 from "../../assets/banner4.jpg";
 import { Container } from "./Banner.style";
 
 export default function Banner() {
@@ -24,16 +20,16 @@ export default function Banner() {
         autoplay={{ delay: 5000 }}
       >
         <SwiperSlide>
-          <img src={banner1} />
+          <img src="https://cdn.pixabay.com/photo/2016/04/21/11/32/groceries-1343141_1280.jpg" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src={banner2} />
+          <img src="https://cdn.pixabay.com/photo/2014/10/22/17/50/books-498422_1280.jpg" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src={banner3} />
+          <img src="https://cdn.pixabay.com/photo/2017/03/22/14/01/toys-2165123_1280.jpg" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src={banner4} />
+          <img src="https://cdn.pixabay.com/photo/2016/08/31/14/49/doraemon-1633720_1280.jpg" />
         </SwiperSlide>
       </Swiper>
     </Container>
