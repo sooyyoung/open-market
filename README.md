@@ -1,13 +1,13 @@
 # open-market
 
-오픈마켓은 구매회원, 판매회원으로 나뉘어 물건을 사고, 팔 수 있는 서비스입니다.
+오픈마켓은 구매회원, 판매회원으로 나뉘어 물건을 사고 팔 수 있는 서비스입니다.
+
 
 <br>
 
-- 배포 URL : <br>
-- 계정 <br>
-`ID` : openmarket <br>
-`Password` : openmarket123
+- 배포 URL : [open-market.app](opennmarket.netlify.app) <br>
+- `ID`: openmarket <br>
+`Password`: openmarket123
 
 <br>
 
@@ -15,7 +15,7 @@
 - react
 - react-router v6
 - axios
-- styled-component
+- styled-components
 - swiper
 
 <br>
@@ -30,10 +30,11 @@
 - 캐러셀
 
 ### 상품 상세
+- 상품 정보
 - 수량 변경
-- 장바구니에 추가
+- 장바구니 담기
 
 ### 장바구니
-- 전체 선택/해제
-- 수량 변경
+- 상품 개별, 전체 선택/해제
 - 상품 삭제
+- 수량 변경
