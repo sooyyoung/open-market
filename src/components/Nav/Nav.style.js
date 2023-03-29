@@ -70,7 +70,7 @@ export const NavBtn = styled(Link)`
   &.sellerBtn {
     width: 158px;
     height: 50px;
-    margin-left: 25px;
+    margin-left: auto;
     border-radius: 5px;
     background: url(${shoppingBagIcon}) no-repeat 18px center royalblue;
     span {

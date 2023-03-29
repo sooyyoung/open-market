@@ -26,23 +26,30 @@ export default function Nav() {
             <span className="ir">검색하기</span>
           </button>
         </Search>
-        <NavBtn to="/shoppingCart" className="cartBtn">
-          <span>장바구니</span>
-        </NavBtn>
         {loginType ? (
-          loginType === "BUYER" ? (
-            <NavBtn to="" className="userBtn" onClick={logout}>
-              <span>로그아웃</span>
-            </NavBtn>
-          ) : (
-            <NavBtn to="/sellerCenter" className="sellerBtn">
-              <span>판매자 센터</span>
-            </NavBtn>
-          )
+            <>
+                {loginType === "BUYER" ?  
+                <NavBtn to="/shoppingCart" className="cartBtn">
+                    <span>장바구니</span>
+                </NavBtn>
+           : 
+                <NavBtn to="/sellerCenter" className="sellerBtn">
+                    <span>판매자 센터</span>
+                </NavBtn>
+                }
+                <NavBtn to="" className="userBtn" onClick={logout}>
+                    <span>로그아웃</span>
+                </NavBtn>
+            </>
         ) : (
-          <NavBtn to="/login" className="userBtn">
-            <span>로그인</span>
-          </NavBtn>
+            <>
+                <NavBtn to="/shoppingCart" className="cartBtn">
+                    <span>장바구니</span>
+                </NavBtn>
+                <NavBtn to="/login" className="userBtn">
+                    <span>로그인</span>
+                </NavBtn>
+            </>
         )}
       </Inner>
     </Header>
