@@ -1,7 +1,7 @@
 import React from "react";
 import Nav from "../../components/Nav/Nav";
 import Banner from "../../components/Banner/Banner";
-import ProductCard from "../../components/Products/ProductCard/ProductCard";
+import ProductList from "../ProductList/ProductList";
 import Footer from "../../components/Footer/Footer";
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <Nav />
       <Banner />
-      <ProductCard />
+      <ProductList />
       <Footer />
     </>
   );
