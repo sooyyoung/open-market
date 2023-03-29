@@ -18,7 +18,11 @@ export default function ProductCard(props) {
               <span>{item.store_name}</span>
               <p>{item.product_name}</p>
               <span className="price">
-                <strong>{item.price.toLocaleString()}</strong>원
+                {item.stock !== 0 ? 
+                    <><strong>{item.price.toLocaleString()}</strong>원</>
+                    :
+                    <strong style={{ "color" : "#eb5757" }}>품절</strong>
+                }
               </span>
             </Product>
           );
