@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import API from "../../../api/api";
 import FormHeader from "../FormHeader";
@@ -9,16 +9,21 @@ export default function LoginForm() {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
-
-  // error 메시지
   const [idMessage, setIdMessage] = useState("");
   const [pwMessage, setPwMessage] = useState("");
+  const loginType = location.state;
+
+  useEffect(() => {
+    setId("");
+    setPw("");
+    setIdMessage("");
+    setPwMessage("");
+  }, [loginType])
 
   // state 초기값 설정
   if (location.state === null) {
     location.state = "BUYER";
   }
-  const loginType = location.state;
 
   // 로그인
   const login = async (e) => {
