@@ -8,6 +8,7 @@ export default function ProductList() {
     const observer = useRef();
 
     useEffect(() => {
+        if (page === 0) return
         getProductList(page);
     }, [page]);
 
