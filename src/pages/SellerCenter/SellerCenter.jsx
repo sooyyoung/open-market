@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import BasicNav from "../../components/Nav/BasicNav";
+import Nav from "../../components/Nav/Nav";
 import image from "../../assets/img.svg";
 import {
   Main,
@@ -21,10 +21,10 @@ export default function SellerCenter() {
 
   return (
     <>
-      <BasicNav />
+      <Nav />
       <Main>
         <h2 className="ir">판매자 센터</h2>
-        <strong>대시보드</strong>
+        <strong>판매자 센터</strong>
         <UploadBtn onClick={moveProductUpload}>상품 업로드</UploadBtn>
 
         <Dashboard>

@@ -5,6 +5,7 @@ import { Header, Inner, H1, Search, NavBtn } from "./Nav.style";
 
 export default function Nav() {
   const loginType = localStorage.getItem("login_type");
+  const pathname = window.location.pathname;
   
   const logout = () => {
     window.localStorage.removeItem("login_type");
@@ -20,12 +21,15 @@ export default function Nav() {
             <img src={logo} alt="오픈마켓 로고" />
           </Link>
         </H1>
-        <Search>
-          <input type="text" placeholder="상품을 검색해보세요!" />
-          <button className="searchIcon">
-            <span className="ir">검색하기</span>
-          </button>
-        </Search>
+        {pathname !== "/sellerCenter" ? 
+            <Search>
+                <input type="text" placeholder="상품을 검색해보세요!" />
+                <button className="searchIcon">
+                    <span className="ir">검색하기</span>
+                </button>
+            </Search>
+        : ""
+        }
         {loginType ? (
             <>
                 {loginType === "BUYER" ?  
@@ -33,11 +37,16 @@ export default function Nav() {
                     <span>장바구니</span>
                 </NavBtn>
            : 
-                <NavBtn to="/sellerCenter" className="sellerBtn">
-                    <span>판매자 센터</span>
-                </NavBtn>
+                <>
+                    {pathname !== "/sellerCenter" ? 
+                        <NavBtn to="/sellerCenter" className="sellerBtn">
+                            <span>판매자 센터</span>
+                        </NavBtn> 
+                    : ""
+                    }
+                </>
                 }
-                <NavBtn to="" className="userBtn" onClick={logout}>
+                <NavBtn to="" className="userBtn" onClick={logout} pathname={pathname}>
                     <span>로그아웃</span>
                 </NavBtn>
             </>

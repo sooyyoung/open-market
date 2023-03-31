@@ -64,7 +64,7 @@ export const NavBtn = styled(Link)`
     background: url(${shoppingCartIcon}) no-repeat top;
   }
   &.userBtn {
-    margin: 0 0 auto 25px;
+    margin: ${(props) => props.pathname === "/sellerCenter" ? "0 0 0 auto" : "0 0 auto 25px"};
     background: url(${userIcon}) no-repeat top;
   }
   &.sellerBtn {
