@@ -21,14 +21,14 @@ export default function Nav() {
             <img src={logo} alt="오픈마켓 로고" />
           </Link>
         </H1>
-        {pathname !== "/sellerCenter" ? 
-            <Search>
+        {pathname === "/sellerCenter" || pathname === "/productUpload" ? 
+            ""
+        :   <Search>
                 <input type="text" placeholder="상품을 검색해보세요!" />
                 <button className="searchIcon">
                     <span className="ir">검색하기</span>
                 </button>
             </Search>
-        : ""
         }
         {loginType ? (
             <>
