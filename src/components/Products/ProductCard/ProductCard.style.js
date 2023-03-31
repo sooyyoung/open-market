@@ -3,10 +3,9 @@ import styled from "styled-components";
 export const Container = styled.section`
   max-width: 1280px;
   margin: 80px auto 180px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 70px;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
 `;
 
 export const Product = styled.div`
