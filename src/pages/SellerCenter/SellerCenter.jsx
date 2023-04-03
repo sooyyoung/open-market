@@ -32,6 +32,21 @@ export default function SellerCenter() {
     }
   };
 
+  const deleteProduct = async (e) => {
+    const productId = e.target.id;
+    if (!window.confirm("상품을 삭제하시겠습니까?")) return
+    try {
+        const res = await API.delete(`/products/${productId}`, {
+            headers: {
+                Authorization: window.localStorage.getItem("token")
+            },
+        });
+        alert("상품이 삭제되었습니다.");
+    } catch (error) {
+        console.error(error);
+    }
+  }
+
   return (
     <>
       <Nav />
@@ -49,7 +64,7 @@ export default function SellerCenter() {
             <table>
               <thead>
                 <tr>
-                  <td>상품정보</td>
+                  <td>상품정보 ({product.length})</td>
                   <td>판매가격</td>
                   <td>수정</td>
                   <td>삭제</td>
@@ -71,7 +86,11 @@ export default function SellerCenter() {
                                 <Button modify>수정</Button>
                             </td>
                             <td>
-                                <Button delete>삭제</Button>
+                                <Button 
+                                    onClick={deleteProduct} 
+                                    id={item.product_id} 
+                                    delete
+                                >삭제</Button>
                             </td>
                         </tr>
                     )
