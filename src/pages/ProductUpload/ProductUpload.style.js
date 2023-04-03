@@ -23,7 +23,7 @@ export const Notice = styled.div`
     margin-bottom: 10px;
   }
   div {
-    width: 280px;
+    width: 250px;
     padding: 20px;
     border-radius: 5px;
     background-color: #FFEFE8;
@@ -49,15 +49,33 @@ export const Container = styled.section`
     width: 450px;
     height: 450px;
     margin-right: 30px;
+    position: relative;
     img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+    .imgUpload {
+        display: block;
+        width: 100%;
+        height: 100%;
         background: url(${uploadImg}) no-repeat center #C4C4C4;
+        position: absolute;
+        top: 30px;
+        left: 0;
+        &.progress {
+            background: none;
+        }
     }
   }
   .infoBox {
     width: calc(100% - 455px);
+    button {
+        &:focus {
+            background-color: royalblue;
+            color: #fff;
+        }
+    }
   }
   input {
     width: 220px;
