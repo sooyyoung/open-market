@@ -32,18 +32,21 @@ export const TabMenu = styled.div`
     width: 250px;
     height: 50px;
     padding: 15px 20px;
+    margin-bottom: 10px;
     border-radius: 5px;
-    background-color: royalblue;
-    color: #fff;
     font-size: 16px;
-    text-align: start;
+    cursor: pointer;
+    &.focus {
+        background-color: royalblue;
+        color: #fff;
+    }
   }
 `;
 
 export const List = styled.section`
   width: 100%;
-  height: 800px;
-  border: 1px solid #c4c4c4;
+  height: 100%;
+  outline: 1px solid #c4c4c4;
   border-radius: 5px;
   background: #f2f2f2;
 
@@ -60,15 +63,20 @@ export const List = styled.section`
     }
     tbody tr {
       height: 100px;
+      &:last-child {
+        border-bottom: none;
+      }
     }
     td.product {
       text-align: start;
-      padding: 22px 0 0 40px;
       display: flex;
       align-items: center;
       vertical-align: middle;
       img {
-        margin-right: 30px;
+        width: 70px;
+        height: 70px;
+        padding: 15px 30px ;
+        border-radius: 50%;
       }
       p {
         font-size: 18px;

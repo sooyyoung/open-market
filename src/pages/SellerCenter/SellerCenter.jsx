@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../../api/api";
 import Nav from "../../components/Nav/Nav";
-import image from "../../assets/img.svg";
 import {
   Main,
   UploadBtn,
@@ -12,24 +12,38 @@ import {
 } from "./SellerCenter.style";
 
 export default function SellerCenter() {
+  const [product, setProduct] = useState("");
   const navigate = useNavigate();
 
-  // 상품 업로드 페이지로 이동
-  const moveProductUpload = () => {
-    navigate("/productUpload");
+  useEffect(() => {
+    getProductList();
+  }, [product])
+
+  const getProductList = async () => {
+    try {
+        const res = await API.get("/seller", {
+            headers: {
+                Authorization: window.localStorage.getItem("token")
+            }
+        });
+        setProduct(res.data.results);
+    } catch (error) {
+        console.error(error);
+    }
   };
 
   return (
     <>
       <Nav />
       <Main>
-        <h2 className="ir">판매자 센터</h2>
         <strong>판매자 센터</strong>
-        <UploadBtn onClick={moveProductUpload}>상품 업로드</UploadBtn>
-
+        <UploadBtn onClick={() => navigate("/productUpload")}>상품 업로드</UploadBtn>
         <Dashboard>
           <TabMenu>
-            <div>판매중인 상품</div>
+            <div className="focus">판매중인 상품</div>
+            <div>주문/배송</div>
+            <div>문의/리뷰</div>
+            <div>스토어 설정</div>
           </TabMenu>
           <List>
             <table>
@@ -42,22 +56,27 @@ export default function SellerCenter() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="product">
-                    <img src={image} alt="" />
-                    <div>
-                      <p>000 운동화</p>
-                      <span>재고 10개</span>
-                    </div>
-                  </td>
-                  <td>139,500원</td>
-                  <td>
-                    <Button modify>수정</Button>
-                  </td>
-                  <td>
-                    <Button delete>삭제</Button>
-                  </td>
-                </tr>
+                {product ? product.map((item, index) => {
+                    return (
+                        <tr key={index}>
+                            <td className="product">
+                                <img src={item.image} alt="" />
+                                <div>
+                                <p>{item.product_name}</p>
+                                <span>재고: {item.stock}개</span>
+                                </div>
+                            </td>
+                            <td>{item.price}원</td>
+                            <td>
+                                <Button modify>수정</Button>
+                            </td>
+                            <td>
+                                <Button delete>삭제</Button>
+                            </td>
+                        </tr>
+                    )
+                }) : ""
+                }
               </tbody>
             </table>
           </List>
