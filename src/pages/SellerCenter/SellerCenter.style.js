@@ -61,31 +61,5 @@ export const List = styled.section`
       height: 60px;
       font-size: 18px;
     }
-    tbody tr {
-      height: 100px;
-      &:last-child {
-        border-bottom: none;
-      }
-    }
-    td.product {
-      text-align: start;
-      display: flex;
-      align-items: center;
-      vertical-align: middle;
-      img {
-        width: 70px;
-        height: 70px;
-        padding: 15px 30px ;
-        border-radius: 50%;
-      }
-      p {
-        font-size: 18px;
-        margin-bottom: 10px;
-      }
-      span {
-        font-size: 16px;
-        color: #767676;
-      }
-    }
   }
 `;
