@@ -12,7 +12,11 @@ export default function Nav() {
   const logout = () => {
     window.localStorage.removeItem("login_type");
     window.localStorage.removeItem("token");
-    window.location.reload();
+    if (loginType === "SELLER") {
+        window.location.pathname = "/";
+    } else {
+        window.location.reload();
+    }
   }
 
   const search = () => {
