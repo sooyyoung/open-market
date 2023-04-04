@@ -13,11 +13,12 @@ import {
 
 export default function SellerCenter() {
   const [product, setProduct] = useState("");
+  const [isEdit, setIsEdit] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     getProductList();
-  }, [product])
+  }, [isEdit])
 
   const getProductList = async () => {
     try {
@@ -31,6 +32,12 @@ export default function SellerCenter() {
         console.error(error);
     }
   };
+
+  const modifyProduct = (idx) => {
+    const newArr = Array(product.length).fill(false);
+    newArr[idx] = true;
+    setIsEdit(newArr);
+  }
 
   return (
     <>
@@ -60,7 +67,10 @@ export default function SellerCenter() {
                     return (
                         <SellerProductList 
                             key={index}
+                            elementIndex={index}
                             item={item}
+                            isSelect={isEdit[index]}
+                            modifyProduct={modifyProduct}
                         />
                     )
                 }) : <tr></tr>
