@@ -1,18 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { Header, Inner, H1, Search, NavBtn } from "./Nav.style";
 
 export default function Nav() {
+  const [keyword, setKeyword] = useState("");
   const loginType = localStorage.getItem("login_type");
   const pathname = window.location.pathname;
-  
+  const navigate = useNavigate();
+
   const logout = () => {
     window.localStorage.removeItem("login_type");
     window.localStorage.removeItem("token");
     window.location.reload();
   }
- 
+
+  const search = () => {
+    navigate(`/?search=${keyword}`);
+    setKeyword("");
+  }
+
   return (
     <Header>
       <Inner>
@@ -24,8 +31,13 @@ export default function Nav() {
         {pathname === "/sellerCenter" || pathname === "/productUpload" ? 
             ""
         :   <Search>
-                <input type="text" placeholder="상품을 검색해보세요!" />
-                <button className="searchIcon">
+                <input 
+                    type="text" 
+                    value={keyword} 
+                    onChange={(e) => setKeyword(e.target.value)}
+                    placeholder="상품을 검색해보세요!"
+                />
+                <button className="searchIcon" onClick={search}>
                     <span className="ir">검색하기</span>
                 </button>
             </Search>
