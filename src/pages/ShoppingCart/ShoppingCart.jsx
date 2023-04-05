@@ -14,7 +14,7 @@ import {
 } from "./ShoppingCart.style";
 
 export default function ShoppingCart() {
-  const [cartItem, setCartItem] = useState("");
+  const [cartItem, setCartItem] = useState([]);
   const [checkItem, setCheckItem] = useState([]);
 
   useEffect(() => {

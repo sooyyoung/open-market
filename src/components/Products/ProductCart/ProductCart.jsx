@@ -11,9 +11,8 @@ import {
 
 export default function ProductCart(props) {
     const [product, setProduct] = useState([]);
-    const [price, setPrice] = useState(""); 
     const [quantity, setQuantity] = useState(props.quantity);
-    const totalPrice = (product.price * quantity);
+    const totalPrice = product.price * quantity;
 
     useEffect(() => {
         getProduct();
@@ -23,7 +22,6 @@ export default function ProductCart(props) {
         try {
             const res = await API.get(`/products/${props.productId}/`);
             setProduct(res.data);
-            setPrice(res.data.price.toLocaleString()); 
         } catch (error) {
             console.error(error);
         }
@@ -41,7 +39,6 @@ export default function ProductCart(props) {
                     Authorization: window.localStorage.getItem("token"),
                 }
             });
-            // console.log(res.data);
         } catch (error) {
             console.error(error);
         }
@@ -103,7 +100,7 @@ export default function ProductCart(props) {
             <ItemInfo>
                 <span>{product.store_name}</span>
                 <p>{product.product_name}</p>
-                <strong>{price}원</strong>
+                <strong>{Number(product.price).toLocaleString()}원</strong>
                 <span className="delivery">택배배송 / {product.shipping_fee}</span>
             </ItemInfo>
             <AmountBtn>
