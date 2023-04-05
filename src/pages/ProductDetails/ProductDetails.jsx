@@ -16,12 +16,11 @@ export default function ProductDetails() {
   const [productImage, setProductImage] = useState();
   const [store, setStore] = useState();
   const [productName, setProductName] = useState();
-  const [productPrice, setProductPrice] = useState();
   const [productInfo, setProductInfo] = useState();
   const [shippingFee, setShippingFee] = useState();
-  const [price, setPrice] = useState(); // 가격 천 단위 콤마 표시
+  const [price, setPrice] = useState(); 
   const [quantity, setQuantity] = useState(1);
-  const totalPrice = (productPrice * quantity).toLocaleString();
+  const totalPrice = price * quantity;
   const [check, setCheck] = useState(true);
   const [soldout, setSoldout] = useState(true);
   let [tab, setTab] = useState(0);
@@ -41,8 +40,7 @@ export default function ProductDetails() {
       setProductName(res.data.product_name);
       setProductInfo(res.data.product_info);
       setShippingFee(res.data.shipping_fee);
-      setProductPrice(res.data.price);
-      setPrice(res.data.price.toLocaleString()); // 가격 천 단위 콤마 표시
+      setPrice(res.data.price); 
       if (res.data.stock === 0) {
         setSoldout(false);
       }
@@ -100,7 +98,7 @@ export default function ProductDetails() {
           <ProductInfo>
             <span>{store}</span>
             <p>{productName}</p>
-            <strong>{price}</strong>원
+            <strong>{Number(price).toLocaleString()}</strong>원
             <span className="delivery">택배배송 / {shippingFee}</span>
           </ProductInfo>
 
@@ -114,7 +112,7 @@ export default function ProductDetails() {
             <p>총 상품 금액</p>
             <span>총 수량 {quantity}개</span>
             <span className="verticalBar">|</span>
-            <strong>{totalPrice}</strong>원
+            <strong>{totalPrice.toLocaleString()}</strong>원
           </ProductPrice>
           
           {soldout ? 

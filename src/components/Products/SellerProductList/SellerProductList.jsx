@@ -78,7 +78,7 @@ export default function SellerProductList(props) {
                 {!isSelect ?
                     <div>
                         <p>{item.product_name}</p>
-                        <span>재고: {item.stock}개</span>
+                        <span>재고: {item.stock.toLocaleString()}개</span>
                     </div> 
                 : 
                     <div>
@@ -108,7 +108,7 @@ export default function SellerProductList(props) {
             </td>
             <td>
                 {!isSelect ?
-                    <>{item.price}원</>
+                    <>{item.price.toLocaleString()}원</>
                 :
                     <>
                         <input 
