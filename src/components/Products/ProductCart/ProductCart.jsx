@@ -29,6 +29,9 @@ export default function ProductCart(props) {
     }
 
     const quantityMinus = async () => {
+        if (quantity === 1) {
+            alert("최소 주문 수량은 1개입니다."); return
+        }
         setQuantity((current) => (current > 1 ? current - 1 : 1));
         try {
             const res = await API.put(`/cart/${cartItem.cart_item_id}/`, {
