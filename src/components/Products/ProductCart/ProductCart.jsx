@@ -10,8 +10,9 @@ import {
 } from "./ProductCart.style"
 
 export default function ProductCart(props) {
+    const { cartItem, checkItem, setCheckItem } = props;
     const [product, setProduct] = useState([]);
-    const [quantity, setQuantity] = useState(props.quantity);
+    const [quantity, setQuantity] = useState(cartItem.quantity);
     const totalPrice = product.price * quantity;
 
     useEffect(() => {
@@ -20,7 +21,7 @@ export default function ProductCart(props) {
 
     const getProduct = async () => {
         try {
-            const res = await API.get(`/products/${props.productId}/`);
+            const res = await API.get(`/products/${cartItem.product_id}/`);
             setProduct(res.data);
         } catch (error) {
             console.error(error);
@@ -30,10 +31,10 @@ export default function ProductCart(props) {
     const quantityMinus = async () => {
         setQuantity((current) => (current > 1 ? current - 1 : 1));
         try {
-            const res = await API.put(`/cart/${props.cartItemId}/`, {
-                product_id: props.productId, 
+            const res = await API.put(`/cart/${cartItem.cart_item_id}/`, {
+                product_id: cartItem.product_id, 
                 quantity: quantity - 1,
-                is_active : props.isActive
+                is_active : cartItem.is_active
             }, {
                 headers: {
                     Authorization: window.localStorage.getItem("token"),
@@ -47,10 +48,10 @@ export default function ProductCart(props) {
     const quantityPlus = async () => {
         setQuantity(quantity + 1);
         try {
-            const res = await API.put(`/cart/${props.cartItemId}/`, {
-                product_id: props.productId, 
+            const res = await API.put(`/cart/${cartItem.cart_item_id}/`, {
+                product_id: cartItem.product_id, 
                 quantity: quantity + 1,
-                is_active : props.isActive
+                is_active : cartItem.is_active
             }, {
                 headers: {
                     Authorization: window.localStorage.getItem("token"),
@@ -63,7 +64,7 @@ export default function ProductCart(props) {
 
     const deleteItem = async () => {
         try {
-            const res = await API.delete(`/cart/${props.cartItemId}/`, {
+            const res = await API.delete(`/cart/${cartItem.cart_item_id}/`, {
                 headers: {
                     Authorization: window.localStorage.getItem("token")
                 },
@@ -77,9 +78,9 @@ export default function ProductCart(props) {
 
     const handleCheck = (checked) => {
         if (checked) {
-            props.setCheckItem((prev) => [...prev, props.cartItemId]);
+            setCheckItem((prev) => [...prev, cartItem]);
         } else {
-            props.setCheckItem(props.checkItem.filter((el) => el !== props.cartItemId));
+            setCheckItem(checkItem.filter((i) => i.product_id !== cartItem.product_id));
         }
     }
 
@@ -91,7 +92,7 @@ export default function ProductCart(props) {
                     onChange={(e) => {
                         handleCheck(e.target.checked);
                     }}
-                    checked={props.checkItem.includes(props.cartItemId) ? true : false}
+                    checked={checkItem.map((i) => i.product_id).includes(cartItem.product_id) ? true : false}
                 />
             </span>
             <div>

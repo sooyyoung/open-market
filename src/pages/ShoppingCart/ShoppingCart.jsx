@@ -24,8 +24,8 @@ export default function ShoppingCart() {
   useEffect(() => {
     let initial = [];
     cartItem.map((i) => {
-        return initial.push(i.cart_item_id);
-    })
+        initial.push(i);
+    });
     setCheckItem(initial);
   }, [cartItem]);
 
@@ -45,8 +45,8 @@ export default function ShoppingCart() {
   const handleCheckAll = (checked) => {
     if (checked) {
         const checkArray = [];
-        cartItem.forEach(el => {
-            checkArray.push(el.cart_item_id);
+        cartItem.map(i => {
+            checkArray.push(i);
         });
         setCheckItem(checkArray);
     } else {
@@ -99,10 +99,7 @@ export default function ShoppingCart() {
             return (
                 <ProductCart 
                     key={index}
-                    quantity={item.quantity}
-                    productId={item.product_id}
-                    cartItemId={item.cart_item_id}
-                    isActive={item.is_active}
+                    cartItem={item}
                     checkItem={checkItem}
                     setCheckItem={setCheckItem}
                 />
