@@ -21,6 +21,14 @@ export default function ShoppingCart() {
     getCart();
   }, []);
 
+  useEffect(() => {
+    let initial = [];
+    cartItem.map((i) => {
+        return initial.push(i.cart_item_id);
+    })
+    setCheckItem(initial);
+  }, [cartItem]);
+
   const getCart = async () => {
     try {
         const res = await API.get("/cart/", {
