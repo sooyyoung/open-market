@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import API from "../../api/api";
+import { getProductList, searchProduct } from "../../api/productApi";
 import ProductCard from "../../components/Products/ProductCard/ProductCard"
 
 export default function ProductList() {
@@ -11,11 +11,15 @@ export default function ProductList() {
     const keyword = decodeURI(location.search).split("=")[1];
 
     useEffect(() => {
-        if (page === 0) return
+        if (page === 0) return;
         if (keyword) {
-            searchProduct();
+            searchProduct(keyword).then(res => {
+                setProducts(res);
+            });
         } else {
-            getProductList(page);
+            getProductList(page).then(res => {
+                setProducts([...products, ...res]);
+            });
         }
     }, [page, keyword]);
 
@@ -32,24 +36,6 @@ export default function ProductList() {
             setPage((p) => p + 1);
         }
     };
-
-    const getProductList = async (page) => {
-        try {
-            const res = await API.get(`/products/?page=${page}`);
-            setProducts([...products, ...res.data.results]);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const searchProduct = async () => {
-        try {
-            const res = await API.get(`/products/?search=${keyword}`);
-            setProducts(res.data.results);
-        } catch (error) {
-            console.error(error);
-        }
-    }
 
     return (
         <ProductCard 

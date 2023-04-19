@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import API from "../../../api/api";
+import { getProduct } from "../../../api/productApi";
+import { editQuantity, deleteItem } from "../../../api/cartApi";
 import deleteIcon from "../../../assets/delete.svg";
 import {
     CartItem,
@@ -16,67 +17,27 @@ export default function ProductCart(props) {
     const totalPrice = product.price * quantity;
 
     useEffect(() => {
-        getProduct();
+        getProduct(cartItem.product_id).then(res => setProduct(res));
     }, []);
-
-    const getProduct = async () => {
-        try {
-            const res = await API.get(`/products/${cartItem.product_id}/`);
-            setProduct(res.data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
 
     const quantityMinus = async () => {
         if (quantity === 1) {
             alert("최소 주문 수량은 1개입니다."); return
         }
         setQuantity((current) => (current > 1 ? current - 1 : 1));
-        try {
-            const res = await API.put(`/cart/${cartItem.cart_item_id}/`, {
-                product_id: cartItem.product_id, 
-                quantity: quantity - 1,
-                is_active : cartItem.is_active
-            }, {
-                headers: {
-                    Authorization: window.localStorage.getItem("token"),
-                }
-            });
-        } catch (error) {
-            console.error(error);
-        }
+        editQuantity(cartItem.cart_item_id, cartItem.product_id, quantity - 1, cartItem.is_active);
     };
 
     const quantityPlus = async () => {
         setQuantity(quantity + 1);
-        try {
-            const res = await API.put(`/cart/${cartItem.cart_item_id}/`, {
-                product_id: cartItem.product_id, 
-                quantity: quantity + 1,
-                is_active : cartItem.is_active
-            }, {
-                headers: {
-                    Authorization: window.localStorage.getItem("token"),
-                }
-            });
-        } catch (error) {
-            console.error(error);
-        }
+        editQuantity(cartItem.cart_item_id, cartItem.product_id, quantity + 1, cartItem.is_active);
     };
 
-    const deleteItem = async () => {
-        try {
-            const res = await API.delete(`/cart/${cartItem.cart_item_id}/`, {
-                headers: {
-                    Authorization: window.localStorage.getItem("token")
-                },
-            });
+    const deleteProduct = async () => {
+        deleteItem(cartItem.cart_item_id).then(() => {
             alert("장바구니의 상품이 삭제되었습니다.");
             window.location.reload();
-        } catch (error) {
-            console.error(error);
-        }
+        })
     }
 
     const handleCheck = (checked) => {
@@ -116,7 +77,7 @@ export default function ProductCart(props) {
                 <strong>{totalPrice.toLocaleString()}원</strong>
                 <button>주문하기</button>
             </ItemPrice>
-            <DeleteBtn onClick={deleteItem}>
+            <DeleteBtn onClick={deleteProduct}>
                 <img src={deleteIcon} alt="" />
             </DeleteBtn>
         </CartItem>

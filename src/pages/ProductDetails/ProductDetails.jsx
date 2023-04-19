@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import API from "../../api/api";
+import { getProduct } from "../../api/productApi";
+import { postCart } from "../../api/cartApi";
 import Nav from "../../components/Nav/Nav";
 import {
   Container,
@@ -23,39 +24,17 @@ export default function ProductDetails() {
   const productId = location.search.split("?")[1];
 
   useEffect(() => {
-    getProduct();
+    getProduct(productId).then(res => {
+        setProduct(res);
+        if (res.stock === 0) {
+            setSoldout(false);
+        }
+    });
   }, []);
 
-  const getProduct = async () => {
-    try {
-      const res = await API.get(`/products/${productId}/`);
-      setProduct(res.data);
-      if (res.data.stock === 0) {
-        setSoldout(false);
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  const addCart = () => {
+    postCart(productId, quantity, soldout).then(alert("장바구니에 상품이 담겼습니다."));
   };
-
-  const goCart = async () => {
-    try {
-        const res = await API.post("/cart/", {
-            product_id: productId, 
-            quantity: quantity,
-            check : soldout
-        }, {
-            headers: {
-                Authorization: window.localStorage.getItem("token"),
-            }
-        });
-        if (res.status === 201) {
-            alert("장바구니에 상품이 담겼습니다.")
-        }
-    } catch (error) {
-        console.log(error);
-    }
-  }
 
   // tab
   const changeTab = (index) => {
@@ -98,7 +77,7 @@ export default function ProductDetails() {
           {soldout ? 
             <>
                 <Button BuyBtn>바로 구매</Button>
-                <Button CartBtn onClick={goCart}>장바구니</Button>
+                <Button CartBtn onClick={addCart}>장바구니</Button> 
             </>
           : <Button SoldOut>품절</Button>
           }

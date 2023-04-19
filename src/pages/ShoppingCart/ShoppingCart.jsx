@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import API from "../../api/api";
+import { getCart, deleteItemAll } from "../../api/cartApi";
 import Nav from "../../components/Nav/Nav";
 import ProductCart from "../../components/Products/ProductCart/ProductCart";
 import plusIcon from "../../assets/icon-plus.svg";
@@ -18,7 +18,7 @@ export default function ShoppingCart() {
   const [checkItem, setCheckItem] = useState([]);
 
   useEffect(() => {
-    getCart();
+    getCart().then(res => setCartItem(res));
   }, []);
 
   useEffect(() => {
@@ -28,19 +28,6 @@ export default function ShoppingCart() {
     });
     setCheckItem(initial);
   }, [cartItem]);
-
-  const getCart = async () => {
-    try {
-        const res = await API.get("/cart/", {
-            headers: {
-                Authorization: window.localStorage.getItem("token")
-            },
-        });
-        setCartItem(res.data.results);
-    } catch (error) {
-        console.log(error);
-    }
-  }
 
   const handleCheckAll = (checked) => {
     if (checked) {
@@ -54,19 +41,12 @@ export default function ShoppingCart() {
     }
   }
 
-  const deleteItemAll = async () => {
-    if (!window.confirm("모든 상품을 삭제하시겠습니까?")) return
-    try {
-        const res = await API.delete(`/cart/`, {
-            headers: {
-                Authorization: window.localStorage.getItem("token")
-            },
-        });
+  const deleteProduct = async () => {
+    if (!window.confirm("모든 상품을 삭제하시겠습니까?")) return;
+    deleteItemAll().then(() => {
         alert("장바구니의 모든 상품이 삭제되었습니다.");
         window.location.reload();
-    } catch (error) {
-        console.error(error);
-    }
+    })
   }
 
   return (
@@ -113,7 +93,7 @@ export default function ShoppingCart() {
         
         {cartItem.length ? 
         <>
-            <DeleteBtn onClick={deleteItemAll}>장바구니 비우기</DeleteBtn>
+            <DeleteBtn onClick={deleteProduct}>장바구니 비우기</DeleteBtn>
             <CartPrice>
                 <p>총 상품금액<strong>0원</strong></p>
                 <img src={minusIcon} alt="" />
