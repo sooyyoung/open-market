@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { getProduct } from "../../../api/productApi";
+import React, { useState } from "react";
 import { editQuantity, deleteItem } from "../../../api/cartApi";
 import deleteIcon from "../../../assets/delete.svg";
 import {
@@ -11,14 +10,9 @@ import {
 } from "./ProductCart.style"
 
 export default function ProductCart(props) {
-    const { cartItem, checkItem, setCheckItem } = props;
-    const [product, setProduct] = useState([]);
+    const { cartItem, checkItem, setCheckItem, totalProduct, setTotalProduct } = props;
     const [quantity, setQuantity] = useState(cartItem.quantity);
-    const totalPrice = product.price * quantity;
-
-    useEffect(() => {
-        getProduct(cartItem.product_id).then(res => setProduct(res));
-    }, []);
+    const totalPrice = cartItem.price * quantity;
 
     const quantityMinus = async () => {
         if (quantity === 1) {
@@ -26,11 +20,13 @@ export default function ProductCart(props) {
         }
         setQuantity((current) => (current > 1 ? current - 1 : 1));
         editQuantity(cartItem.cart_item_id, cartItem.product_id, quantity - 1, cartItem.is_active);
+        setTotalProduct(totalProduct - cartItem.price);
     };
 
     const quantityPlus = async () => {
         setQuantity(quantity + 1);
         editQuantity(cartItem.cart_item_id, cartItem.product_id, quantity + 1, cartItem.is_active);
+        setTotalProduct(totalProduct + cartItem.price);
     };
 
     const deleteProduct = async () => {
@@ -60,13 +56,13 @@ export default function ProductCart(props) {
                 />
             </span>
             <div>
-                <img className="image" src={product.image} alt="" />
+                <img className="image" src={cartItem.image} alt="" />
             </div>
             <ItemInfo>
-                <span>{product.store_name}</span>
-                <p>{product.product_name}</p>
-                <strong>{Number(product.price).toLocaleString()}원</strong>
-                <span className="delivery">택배배송 / {product.shipping_fee}</span>
+                <span>{cartItem.store_name}</span>
+                <p>{cartItem.product_name}</p>
+                <strong>{Number(cartItem.price).toLocaleString()}원</strong>
+                <span className="delivery">택배배송 / {cartItem.shipping_fee}</span>
             </ItemInfo>
             <AmountBtn>
                 <button className="minus" onClick={quantityMinus}>-</button>
